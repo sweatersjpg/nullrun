@@ -81,7 +81,10 @@ function PostScore(data) {
     fetch("https://kett.loca.lt/leaderboard/", {
         body: JSON.stringify(data),
         method: "POST",
-        headers: { "Content-Type": "application/json" }
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": document.URL
+        }
     }).then(response => {
         if (response.ok) {
             apiStatus = "complete";
@@ -100,6 +103,10 @@ function GetLeaderboard() {
 
     fetch("https://kett.loca.lt/leaderboard/", {
         method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": document.URL
+        }
     }).then(response => {
         if (response.ok) return response.json();
         else {
@@ -118,6 +125,11 @@ function CheckPulse() {
     apiStatus = "waiting";
     fetch("https://kett.loca.lt/test/", {
         method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "User-Agent": "sweatersjpg/0.1"
+        }
     }).then(response => {
         if (response.ok) {
             apiStatus = "complete";
