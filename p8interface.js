@@ -83,7 +83,8 @@ function PostScore(data) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": document.URL
+            "Access-Control-Allow-Origin": "*",
+            "User-Agent": "sweatersjpg/0.1"
         }
     }).then(response => {
         if (response.ok) {
@@ -105,7 +106,8 @@ function GetLeaderboard() {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": document.URL
+            "Access-Control-Allow-Origin": "*",
+            "User-Agent": "sweatersjpg/0.1"
         }
     }).then(response => {
         if (response.ok) return response.json();
