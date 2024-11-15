@@ -25,17 +25,22 @@ let server = app.listen(3000, 'localhost');
 log("sLeaderboard Started");
 
 app.get("/test", (request, response) => {
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Headers", "Content-Type");
     response.send("Hello World!");
 });
 
 app.post("/leaderboard", (request, response) => {
-    console.log(request.body);
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    data = request.body;
+    console.log(data);
 
     let s = leaderboardData.addScore(
-        request.body.id,
-        request.body.username,
-        parseInt(request.body.score),
-        parseInt(request.body.validation));
+        data.id,
+        data.username,
+        parseInt(data.score),
+        parseInt(data.validation));
     log(s);
     response.json({ message: s });
 });
@@ -43,6 +48,8 @@ app.post("/leaderboard", (request, response) => {
 app.get("/leaderboard", (request, response) => {
     // console.log(request.body);
     // response.json({ message: "ok" });
+    response.setHeader("Access-Control-Allow-Origin", "*");
+    response.setHeader("Access-Control-Allow-Headers", "Content-Type");
     response.json(leaderboardData.topScores(15));
 });
 

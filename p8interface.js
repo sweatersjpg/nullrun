@@ -75,15 +75,19 @@ setInterval(checkForStatus, 1000);
 
 // ---- api interface ----
 
+let header = new Headers();
+//header.append("Content-Type", "application/json")
+
 function PostScore(data) {
     apiStatus = "waiting";
 
     fetch("https://kett.loca.lt/leaderboard/", {
-        body: JSON.stringify(data),
+        body: new URLSearchParams(data),
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
-        }
+            "Content-Type": "application/x-www-form-urlencoded",
+        },
+        mode: "cors"
     }).then(response => {
         if (response.ok) {
             apiStatus = "complete";
@@ -94,6 +98,9 @@ function PostScore(data) {
             //PostScore(data);
             apiStatus = "idle";
         }
+    }).catch(err => {
+        console.log(err);
+        apiStatus = "idle";
     });
 }
 
@@ -102,9 +109,7 @@ function GetLeaderboard() {
 
     fetch("https://kett.loca.lt/leaderboard/", {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: header
     }).then(response => {
         if (response.ok) return response.json();
         else {
@@ -116,16 +121,18 @@ function GetLeaderboard() {
         //console.log(json);
         leaderboard = json;
         apiStatus = "complete"
+    }).catch(err => {
+        console.log(err);
+        apiStatus = "idle";
     });
 }
 
 function CheckPulse() {
     apiStatus = "waiting";
+
     fetch("https://kett.loca.lt/test/", {
         method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        headers: header
     }).then(response => {
         if (response.ok) {
             apiStatus = "complete";
@@ -135,7 +142,11 @@ function CheckPulse() {
             apiStatus = "idle";
             console.log("retrying");
         }
+    }).catch(err => {
+        console.log(err);
+        apiStatus = "idle";
     });
+
 }
 
 // ---- pico8 interface ----
