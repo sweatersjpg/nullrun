@@ -9,8 +9,8 @@ const _error = 4
 let leaderboard = [];
 
 let apiStatus = "idle";
-let attempts = 10;
-const maxAttempts = 10;
+let attempts = 40;
+const maxAttempts = 40;
 
 function checkForStatus() {
     if (attempts < 0) {
