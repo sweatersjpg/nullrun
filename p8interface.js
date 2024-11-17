@@ -76,12 +76,12 @@ setInterval(checkForStatus, 1000);
 // ---- api interface ----
 
 let header = new Headers();
-//header.append("Content-Type", "application/json")
+//header.append("Bypass-Tunnel-Reminder", "true");
 
 function PostScore(data) {
     apiStatus = "waiting";
 
-    fetch("https://kett.loca.lt/leaderboard/", {
+    fetch("https://sleaderboardapi.onrender.com/leaderboard/", {
         body: new URLSearchParams(data),
         method: "POST",
         headers: {
@@ -107,7 +107,7 @@ function PostScore(data) {
 function GetLeaderboard() {
     apiStatus = "waiting";
 
-    fetch("https://kett.loca.lt/leaderboard/", {
+    fetch("https://sleaderboardapi.onrender.com/leaderboard/", {
         method: "GET",
         headers: header
     }).then(response => {
@@ -130,7 +130,7 @@ function GetLeaderboard() {
 function CheckPulse() {
     apiStatus = "waiting";
 
-    fetch("https://kett.loca.lt/test/", {
+    fetch("https://sleaderboardapi.onrender.com/test/", {
         method: "GET",
         headers: header
     }).then(response => {
