@@ -76,7 +76,6 @@ setInterval(checkForStatus, 1000);
 // ---- api interface ----
 
 let header = new Headers();
-header.append("User-Agent", "localtunnel");
 //header.append("Content-Type", "application/json")
 
 function PostScore(data) {
