@@ -9,8 +9,8 @@ const _error = 4
 let leaderboard = [];
 
 let apiStatus = "idle";
-let attempts = 40;
-const maxAttempts = 40;
+let attempts = 10;
+const maxAttempts = 10;
 
 function checkForStatus() {
     if (attempts < 0) {
@@ -76,6 +76,7 @@ setInterval(checkForStatus, 1000);
 // ---- api interface ----
 
 let header = new Headers();
+header.append("User-Agent", "localtunnel");
 //header.append("Content-Type", "application/json")
 
 function PostScore(data) {
